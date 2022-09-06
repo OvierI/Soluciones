@@ -66,12 +66,13 @@ def all_sol_for_n(n):
   sol = [] 
   sol += [anomalyparimpar(n) for i in range(50000000)]
   final = [i for i in sol if i[0] is not None]
-  return np.array(final)
+  return final
   
 from multiprocessing import Pool
 n = int(input("Por favor ingrese el valor de n que sea mayor que 4; "))
 resultados = Pool().map(all_sol_for_n, list(range(n,n+1)))
 
 df=pd.DataFrame(resultados)
+df.T
 
 
