@@ -41,6 +41,8 @@ def anomalyparimpar(n): #Este método halla una solución final Z para n par o i
         return [None]
       if max(abs(anomaly.free.simplified))>32:
         return [None]
+      if anomaly.free.simplified[0]<0:
+        anomaly.free.simplified = -anomaly.free.simplified
       if ( 0 in [ sum(p) for p in itertools.permutations(anomaly.free.simplified, 2) ]): 
         return [None]
       else:
@@ -57,6 +59,8 @@ def anomalyparimpar(n): #Este método halla una solución final Z para n par o i
           return [None]
         if max(abs(anomaly.free.simplified))>32:
           return [None]
+        if anomaly.free.simplified[0]<0:
+        anomaly.free.simplified = -anomaly.free.simplified
         if ( 0 in [ sum(p) for p in itertools.permutations(anomaly.free.simplified, 2) ]): 
           return [None]
         else:
@@ -73,6 +77,8 @@ n = int(input("Por favor ingrese el valor de n que sea mayor que 4; "))
 resultados = Pool().map(all_sol_for_n, list(range(n,n+1)))
 
 df=pd.DataFrame(resultados)
-df.T
+df=df.T
+df=df.astype(str)
+df.drop_duplicates().reset_index(drop=True)
 
 
